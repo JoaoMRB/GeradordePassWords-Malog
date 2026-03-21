@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Gerador de PassWords seguro com medidor de forca, presets, multiplas PassWords e preferencias guardadas."
+    />
+    <link rel="stylesheet" href="style.css" />
+    <script
+      src="https://kit.fontawesome.com/f223593715.js"
+      crossorigin="anonymous"
+    ></script>
+    <title>Gerador de PassWords - Malog</title>
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="hero-panel">
+        <div class="hero-copy">
+          <span class="eyebrow">Seguranca + UX</span>
+          <h1>Gerador de PassWords</h1>
+          <p>
+            Cria PassWords fortes com geracao criptografica, presets rapidos,
+            verificacao de forca e ferramentas pensadas para uso real.
+          </p>
+        </div>
+
+        <div class="security-tips">
+          <h2>Boas praticas</h2>
+          <ul>
+            <li>Usa uma PassWords diferente para cada conta.</li>
+            <li>Prefere 16 ou mais caracteres sempre que possivel.</li>
+            <li>Ativa 2FA para reduzir o impacto de fugas de dados.</li>
+            <li>Evita padroes simples como `1234`, `abcd` ou datas.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="generator-card">
+        <div class="card-topbar">
+          <div>
+            <span class="eyebrow">Personalização</span>
+            <h2>Configura a tua PassWords</h2>
+            <p class="topbar-subtitle">
+              Ajusta o perfil, gera instantaneamente e confirma a forca antes de copiar.
+            </p>
+          </div>
+
+          <button
+            id="themeToggle"
+            class="icon-btn"
+            type="button"
+            aria-label="Alternar tema"
+            title="Alternar tema"
+          >
+            <i class="fas fa-moon"></i>
+          </button>
+        </div>
+
+        <div class="status-strip">
+          <div class="status-pill">
+            <span class="status-label">Perfil</span>
+            <strong id="profileBadge">Equilibrado</strong>
+          </div>
+          <div class="status-pill">
+            <span class="status-label">Complexidade</span>
+            <strong id="complexityBadge">4 tipos</strong>
+          </div>
+          <div class="status-pill">
+            <span class="status-label">Saida</span>
+            <strong id="batchBadge">1 PassWords</strong>
+          </div>
+        </div>
+
+        <div class="result-panel">
+          <label class="section-label" for="result">PassWords gerada</label>
+          <div class="result-input-wrap">
+            <input
+              id="result"
+              class="result-input"
+              type="password"
+              readonly
+              placeholder="A tua PassWords vai aparecer aqui"
+            />
+            <button
+              id="toggleVisibility"
+              class="icon-btn"
+              type="button"
+              aria-label="Mostrar ou esconder PassWords"
+              title="Mostrar ou esconder PassWords"
+            >
+              <i class="fas fa-eye"></i>
+            </button>
+          </div>
+          <br>    
+          <div class="result-meta">
+            <span id="charCount">0 caracteres</span>
+            <span id="copyFeedback" class="copy-feedback" aria-live="polite"></span>
+          </div>
+          <div class="result-actions-inline">
+            <span class="inline-tip">Dica: usa "Regenerar" ate gostares do resultado.</span>
+            <button id="btnUseFirst" class="text-action" type="button" disabled>
+              Usar esta PassWords
+            </button>
+          </div>
+        </div>
+
+        <div class="strength-panel">
+          <div class="strength-heading">
+            <span class="section-label">Forca</span>
+            <span id="strengthText" class="strength-text">Sem avaliar</span>
+          </div>
+          <div class="strength-bar" aria-hidden="true">
+            <span id="strengthFill"></span>
+          </div>
+          <p id="strengthTip" class="strength-tip">
+            Gera uma PassWords para veres sugestoes de melhoria.
+          </p>
+        </div>
+
+        <div class="controls-grid">
+          <div class="panel">
+            <div class="panel-header">
+              <h3>Presets</h3>
+              <span class="panel-kicker">Atalhos rapidos</span>
+            </div>
+            <div class="preset-grid">
+              <button class="chip-btn" type="button" data-preset="readable">
+                Facil de ler
+              </button>
+              <button class="chip-btn" type="button" data-preset="secure">
+                Muito segura
+              </button>
+              <button class="chip-btn" type="button" data-preset="pin">
+                PIN
+              </button>
+            </div>
+          </div>
+
+          <div class="panel">
+            <div class="panel-header">
+              <h3>Comprimento</h3>
+              <span id="lengthValue" class="value-pill">16</span>
+            </div>
+            <div class="range-scale" aria-hidden="true">
+              <span>Curta</span>
+              <span>Equilibrada</span>
+              <span>Maxima</span>
+            </div>
+            <input
+              id="passLength"
+              type="range"
+              min="8"
+              max="64"
+              value="16"
+            />
+            <div class="inline-inputs">
+              <label class="stacked-field">
+                <span>Valor exato</span>
+                <input id="passLengthNumber" type="number" min="8" max="64" value="16" />
+              </label>
+
+              <label class="stacked-field">
+                <span>Quantidade</span>
+                <input id="passwordCount" type="number" min="1" max="10" value="1" />
+              </label>
+            </div>
+            <p id="lengthHint" class="helper-text">
+              Entre 8 e 64 caracteres para equilibrar seguranca e usabilidade.
+            </p>
+          </div>
+        </div>
+
+        <br>
+
+        <div class="panel">
+          <div class="panel-header">
+            <h3>Tipos de caracteres</h3>
+          </div>
+
+          <div class="toggle-grid">
+            <label class="toggle-card">
+              <input id="upperCase" type="checkbox" checked />
+              <span class="toggle-icon">A</span>
+              <span class="toggle-copy">
+                <strong>Maiusculas</strong>
+                <small>ABCDEF...</small>
+              </span>
+            </label>
+
+            <label class="toggle-card">
+              <input id="lowerCase" type="checkbox" checked />
+              <span class="toggle-icon">a</span>
+              <span class="toggle-copy">
+                <strong>Minusculas</strong>
+                <small>abcdef...</small>
+              </span>
+            </label>
+
+            <label class="toggle-card">
+              <input id="number" type="checkbox" checked />
+              <span class="toggle-icon">1</span>
+              <span class="toggle-copy">
+                <strong>Numeros</strong>
+                <small>012345...</small>
+              </span>
+            </label>
+
+            <label class="toggle-card">
+              <input id="symbol" type="checkbox" checked />
+              <span class="toggle-icon">#</span>
+              <span class="toggle-copy">
+                <strong>Simbolos</strong>
+                <small>!@#$...</small>
+              </span>
+            </label>
+
+            <label class="toggle-card toggle-card--wide">
+              <input id="avoidSimilar" type="checkbox" />
+              <span class="toggle-icon"><i class="fas fa-low-vision"></i></span>
+              <span class="toggle-copy">
+                <strong>Evitar caracteres parecidos</strong>
+                <small>Remove `O`, `0`, `I`, `l`, `1` e semelhantes</small>
+              </span>
+            </label>
+          </div>
+        </div>
+
+        <p id="errorMessage" class="error-message" aria-live="polite"></p>
+
+        <div class="action-row">
+          <button id="btnGenerate" class="btn btn-primary" type="button">
+            <i class="fas fa-key"></i>
+            Gerar
+          </button>
+          <button id="btnRegenerate" class="btn btn-secondary" type="button">
+            <i class="fas fa-rotate-right"></i>
+            Regenerar
+          </button>
+          <button id="btnCopy" class="btn btn-secondary" type="button" disabled>
+            <i class="far fa-copy"></i>
+            Copiar
+          </button>
+          <button id="btnCopyAll" class="btn btn-secondary" type="button" disabled>
+            <i class="fas fa-copy"></i>
+            Copiar todas
+          </button>
+          <button id="btnDownload" class="btn btn-secondary" type="button" disabled>
+            <i class="fas fa-download"></i>
+            Baixar .txt
+          </button>
+          <button id="btnClear" class="btn btn-ghost" type="button">
+            <i class="fas fa-eraser"></i>
+            Limpar
+          </button>
+        </div>
+
+        <div class="list-panel">
+          <div class="panel-header">
+            <h3>PassWordss geradas</h3>
+            <span id="listSummary" class="helper-chip">0 resultados</span>
+          </div>
+          <p class="list-caption">
+            Cada linha pode ser copiada individualmente. Quando geras varias, podes tambem copiar tudo ou descarregar.
+          </p>
+          <div id="generatedList" class="generated-list">
+            <p class="empty-state">Gera uma ou varias PassWordss para veres a lista aqui.</p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script type="module" src="./js.js"></script>
+  </body>
+</html>
