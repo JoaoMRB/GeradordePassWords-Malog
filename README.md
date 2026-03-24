@@ -1,6 +1,6 @@
-# Gerador de Senhas Pro
+# Gerador de Password
 
-Gerador de senhas moderno com foco em seguranca e UX. O projeto usa `crypto.getRandomValues` para geracao mais segura, permite personalizar comprimento e tipos de caracteres, inclui medidor de forca, presets rapidos, geracao multipla, copia facil e armazenamento local das preferencias.
+Gerador de password moderno com foco em seguranca e UX. O projeto usa `crypto.getRandomValues` para geracao mais segura, permite personalizar comprimento e tipos de caracteres, inclui medidor de forca, presets rapidos, geracao multipla, copia facil e armazenamento local das preferencias.
 
 ## Tecnologias usadas
 
