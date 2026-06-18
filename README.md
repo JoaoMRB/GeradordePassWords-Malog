@@ -1,18 +1,44 @@
-# Gerador de Password
+# PurePass
 
-Gerador de password moderno com foco em seguranca e UX. O projeto usa `crypto.getRandomValues` para geracao mais segura, permite personalizar comprimento e tipos de caracteres, inclui medidor de forca, presets rapidos, geracao multipla, copia facil e armazenamento local das preferencias.
+**Demo:** [joaomrb.github.io/PurePass](https://joaomrb.github.io/PurePass/) · **Repo:** [github.com/JoaoMRB/PurePass](https://github.com/JoaoMRB/PurePass)
 
-## Tecnologias usadas
+🌐 **Read in:** [**Português (PT)**](./README.pt-PT.md)
 
-- HTML5
-- CSS3
-- JavaScript (ES6+)
-- Web Crypto API (`crypto.getRandomValues`)
-- LocalStorage
-- Font Awesome
+---
 
+Premium password & passphrase generator with reactive generation and 100% local execution.
 
-## Usar o projeto
+## Features
 
-Abre a app aqui:
-https://joaomrb.github.io/GeradordePassWords-Malog/
+-  Cryptographic generation via Web Crypto API
+-  Instant updates when changing options
+-  Bilingual PT / EN interface
+-  5 color themes + light/dark mode
+-  Auto clipboard wipe (30s)
+-  Diceware-style passphrase mode
+-  Entropy analysis & crack time estimate
+-  Presets: Readable, Fortified, PIN
+
+## Stack
+
+- **React 19** + **TypeScript** + **Vite**
+- **Lucide React** (icons)
+- Zero backend — everything runs in the browser
+
+## Development
+
+```bash
+npm install
+npm run dev
+```
+
+## Build
+
+```bash
+npm run build
+npm run preview
+```
+
+---
+
+**PurePass** · Open Source · [Malog](https://github.com/JoaoMRB) · [Repository](https://github.com/JoaoMRB/PurePass)
